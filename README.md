@@ -1,6 +1,6 @@
 # EZBankApp
 
-##### EZBankApp Coding Exercise
+### EZBankApp Coding Exercise
 
 At EZBank we think banking should be simple.  We have a web API that consists of only 2 methods: GET Balance and POST Payment.
 
@@ -13,7 +13,7 @@ http://ezbanking.gear.host/swagger/
 
 We need your help building an app.
 
-##### Requirements:
+### Requirements:
 
 Deliver an Android apk and source (fork this repo on github), built using NativeScript and Angular:
 
