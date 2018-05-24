@@ -1,0 +1,49 @@
+node_modules
+platforms
+hooks
+tags
+**/*.js.map
+**/*.metadata.json
+
+/app/**/*.d.ts
+/app/**/*.js
+
+!/app/global.d.ts
+!/app/postinstall.js
+!/app/hooks/**/*.js
+!/app/gulpfile.js
+!/app/zone-js/dist/*.js
+
+.tscache
+.nvm
+.vscode
+.DS_Store
+npm-debug.log
+app*.tgz
+package-lock.json
+
+# Apps' JS files
+tests/app/**/*.js
+tests/test-output.txt
+app/**/*.js
+
+# Webpack configuration files
+webpack.config.js
+vendor.ts
+vendor-platform.android.ts
+vendor-platform.ios.ts
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
