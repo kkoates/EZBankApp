@@ -24,8 +24,11 @@ import { PaymentService } from "./shared/services/payment.service";
   `
 })
 export class AppComponent {
+
+  //figure out how to get this working in [([ngModel])]
   accountName: string = "Unknown Account";
   accountBalance: number  = -999;
+  paymentAmount: number =0;
   isLoading: boolean = false;
 
   constructor( 
@@ -43,7 +46,7 @@ export class AppComponent {
   }
 
   makePayment(){
-    this.paymentService.makePayment(0);
+    this.paymentService.makePayment(this.paymentAmount);
     this.getBalance();
   }
 

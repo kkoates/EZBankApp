@@ -6,24 +6,18 @@ import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 export class BalanceService {
 
   private serverUrl = "http://ezbanking.gear.host/api/Money/Balance";
-  private balance: number;
+  private balance: number = -1;
 
   constructor(private http: HttpClient) { 
   }
-
-  /*
-  getBalance(): number {
-    return 5;
-  }
-  */
-  
-  
+    
   getBalance(): number { 
     this.getData()
       .subscribe((result: Response|any) => {
         const body = result.json() || "";
         const json = JSON.stringify(body);
         this.balance =  json["balance"];
+        console.dir(json);
       }, (error: Response|any) => {
         const body = error.json() || "";
         const err = body.error || JSON.stringify(body);
@@ -31,8 +25,6 @@ export class BalanceService {
       });
       return this.balance;
   }
-  
-
 
   getData() {
       let headers = this.createRequestHeader();
