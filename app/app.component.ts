@@ -58,12 +58,13 @@ export class AppComponent {
     this.paymentService.makePayment(this.paymentAmount)
     .then ( (result) => {
       result.subscribe ( (response) => {
-        if (response.ok ===true){
+        if (response.ok === true) {
           console.dir(response);
-          dialogs.alert('Made successful payment of $ ' + response.payment.amount);  
-        } else{
+          dialogs.alert(response.message); //shouldn't use this directly , but it proves we hit the API 
+        } else {
           dialogs.alert('payment failed');  
         }
+        this.getBalance();
       });
     });
   }
