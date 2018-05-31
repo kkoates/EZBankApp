@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { BalanceService } from "./shared/services/balance.service";
 import { PaymentService } from "./shared/services/payment.service";
+import { BalanceResponse } from "~/shared/interfaces/balance";
+import { PaymentResponse } from "~/shared/interfaces/payments";
+import * as dialogs from "ui/dialogs";
 
 @Component({
   selector: "my-app",
@@ -12,10 +15,10 @@ import { PaymentService } from "./shared/services/payment.service";
         <Label [text]="accountName" class="h1 text-center"></Label>
         <StackLayout orientation="horizontal">
           <Label text="Balance:" class="h2"></Label>
-          <Label [text]="accountBalance" class="h2 text-center"></Label>
+          <TextField [(ngModel)]="accountBalance" class="h2 text-center" width="80%"></TextField>
         </StackLayout>
       </StackLayout>
-      <TextField hint="Enter Amount" keyboardType="number"></TextField>
+      <TextField hint="Enter Amount" [(ngModel)]="paymentAmount" keyboardType="number"></TextField>
       <Button text="Make A Payment" (tap)="makePayment()"></Button>
     </StackLayout>
     <!--
@@ -27,8 +30,8 @@ export class AppComponent {
 
   //figure out how to get this working in [([ngModel])]
   accountName: string = "Unknown Account";
-  accountBalance: number  = -999;
-  paymentAmount: number =0;
+  accountBalance: number  = 1;
+  paymentAmount: number = 0;
   isLoading: boolean = false;
 
   constructor( 
@@ -38,16 +41,31 @@ export class AppComponent {
     this.accountBalance = 0;
     this.accountName = "Basic Checking";
     this.isLoading = false;
- 
+
+    this.getBalance();
   }
 
    getBalance(){
-    this.accountBalance = this.balanceService.getBalance();
+    this.accountBalance = null; 
+    this.balanceService.getBalance()
+    .subscribe ((response: BalanceResponse) => {
+      //console.dir(response);
+      this.accountBalance = response.balance.amount;
+    });
   }
 
   makePayment(){
-    this.paymentService.makePayment(this.paymentAmount);
-    this.getBalance();
+    this.paymentService.makePayment(this.paymentAmount)
+    .then ( (result) => {
+      result.subscribe ( (response) => {
+        if (response.ok ===true){
+          console.dir(response);
+          dialogs.alert('Made successful payment of $ ' + response.payment.amount);  
+        } else{
+          dialogs.alert('payment failed');  
+        }
+      });
+    });
   }
 
 }
