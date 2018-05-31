@@ -27,6 +27,9 @@ tests/app/**/*.js
 tests/test-output.txt
 app/**/*.js
 
+# Don't ignore jasmine tests
+!app/tests/**/*.js
+
 # Webpack configuration files
 webpack.config.js
 vendor.ts
