@@ -1,0 +1,9 @@
+@import "nativescript-theme-core/css/sky.css";
+Page {
+    background-color: white;
+    font-size: 15;
+  }
+  TextField {
+    padding: 10;
+    font-size: 20;
+  }
